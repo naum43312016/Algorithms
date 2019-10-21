@@ -3,20 +3,35 @@ package com.naum.sorting;
 
 import java.util.Arrays;
 
+
 public class MergeSort { //O(n log n)
+    public static void main(String args[])
+    {
+        int[] arr = {10,2,5,8,6};
+        int n = arr.length;
+        
+        mergeSort(arr,n);
+        System.out.println("sorted array");
+        System.out.println(Arrays.toString(arr));
+    }
+
 
     public static void mergeSort(int[] a, int n) {
         if (n < 2) {
             return;
         }
         int mid = n / 2;
+        int[] l = new int[mid];
+        int[] r = new int[n - mid];
 
-        int[] l = Arrays.copyOfRange(a,0,mid);
-        int[] r = Arrays.copyOfRange(a,mid,n);
-
+        for (int i = 0; i < mid; i++) {
+            l[i] = a[i];
+        }
+        for (int i = mid; i < n; i++) {
+            r[i - mid] = a[i];
+        }
         mergeSort(l, mid);
         mergeSort(r, n - mid);
-
         merge(a, l, r, mid, n - mid);
     }
 
